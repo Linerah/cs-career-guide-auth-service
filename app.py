@@ -14,16 +14,24 @@ client = pymongo.MongoClient(
 db = client['user-auth']
 
 
-@app.route('/auth/', methods=['POST', 'GET'])
-def home():
+@app.route('/login', methods=['POST', 'GET'])
+def login():
     if request.method == 'GET':
         user = models.User()
-        password = request.json['password']
-        email = request.json['email']
-        return user.login(email, password)
+        print('hi')
+        password = request.args.get('password')
+        email = request.args.get('email')
+        print("password: ", password)
+        print("email: ", email)
+        return user.login(email, password, db)
+
+
+@app.route('/register', methods=['POST', 'GET'])
+def register():
     if request.method == 'POST':
         user = models.User()
         name = request.json['name']
         password = request.json['password']
         email = request.json['email']
-        return user.signup(name, email, password)
+        print(request.json)
+        return user.signup(name, email, password, db)
