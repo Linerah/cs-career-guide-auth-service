@@ -2,12 +2,14 @@
 from flask import Flask, request
 import pymongo
 from user import models
+from flask_cors import CORS
 
 app = Flask(__name__)
 app.secret_key = b'\xcc^\x91\xea\x17-\xd0W\x03\xa7\xf8J0\xac8\xc5'
 
 app.config['MONGO_DBNAME'] = 'user_auth'
 
+CORS(app)
 client = pymongo.MongoClient(
     "mongodb+srv://admin:NtXLrfmOBLhl00bm@capstoneauth.25mmcqj.mongodb.net/?retryWrites=true&w=majority", tls=True,
     tlsAllowInvalidCertificates=True)
