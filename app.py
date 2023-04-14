@@ -2,10 +2,10 @@
 from flask import Flask, request
 import pymongo
 from user import models
-from flask_cors import CORS
+from flask_cors import CORS, cross_origin
 
 app = Flask(__name__)
-cors = CORS(app, resources={r"/*": {"origins": "*"}})
+cors = CORS(app)
 
 app.secret_key = b'\xcc^\x91\xea\x17-\xd0W\x03\xa7\xf8J0\xac8\xc5'
 
@@ -18,6 +18,7 @@ db = client['user-auth']
 
 
 @app.route('/login', methods=['POST', 'GET'])
+@cross_origin()
 def login():
     if request.method == 'GET':
         user = models.User()
@@ -30,6 +31,7 @@ def login():
 
 
 @app.route('/register', methods=['POST', 'GET'])
+@cross_origin()
 def register():
     if request.method == 'POST':
         user = models.User()
