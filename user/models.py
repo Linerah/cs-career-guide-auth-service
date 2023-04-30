@@ -9,7 +9,7 @@ class User:
         del user['password']
         return jsonify(user), 200
 
-    def signup(self, name, email, password, db):
+    def signup(self, name, email, password, isProfessor, db):
         print(request.form)
 
         # Create the user object
@@ -17,7 +17,8 @@ class User:
             "_id": uuid.uuid4().hex,
             "name": name,
             "email": email,
-            "password": password
+            "password": password,
+            "isProfessor": isProfessor
         }
 
         # Encrypt the password

@@ -38,5 +38,6 @@ def register():
         name = request.json['name']
         password = request.json['password']
         email = request.json['email']
+        isProfessor = False
         print(request.json)
-        return user.signup(name, email, password, db)
+        return user.signup(name, email, password, isProfessor, db)
